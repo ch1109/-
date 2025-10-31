@@ -1,0 +1,205 @@
+import type { AgentDefinition } from '../types/roadmap';
+
+export const agents: AgentDefinition[] = [
+  {
+    id: 'agent-1',
+    name: '财富规划师（Wealth Planner）',
+    positioning: '用户的人生财务 CEO',
+    coreResponsibility:
+      '将人生目标转化为可执行的财富路线图，陪伴用户全生命周期的财务决策，并持续提升财商认知。',
+    keyCapabilities: [
+      '生命周期建模：识别 8 大人生阶段的财务特征与转折点。',
+      '目标架构设计：多目标优先级排序、冲突化解与动态调整。',
+      '现金流工程：收支结构诊断、应急储备计算、被动收入路径设计。',
+      '家庭财务协同：夫妻规划、代际传承与风险保障体系构建。',
+      '财商教育：通俗解释 10 大核心财务概念并纠偏错误观念。',
+      '危机干预：识别财务危机信号，支持债务重组与心理疏导。',
+    ],
+    collaborators: [
+      '理财 Agent 调度协调管家（Orchestrator）',
+      '投资策略师（Investment Strategist）',
+      '风控合规官（Risk & Compliance Officer）',
+      '财富管家（Wealth Steward）',
+      '数据分析师（Data Analyst）',
+    ],
+  },
+  {
+    id: 'agent-2',
+    name: '理财 Agent 调度协调管家（Orchestrator）',
+    positioning: '系统的智能中枢与交通指挥官',
+    coreResponsibility:
+      '保障多 Agent 协同如同专家会诊，保持人格一致、记忆贯通与响应时效，让用户感知“一个管家”。',
+    keyCapabilities: [
+      '意图理解引擎：NLU 深度解析、多轮对话上下文管理与模糊需求澄清。',
+      '场景识别与路由：维护 50+ 典型场景库与场景- Agent 映射。',
+      'Agent 编排：支持串行、并行、递归调用与条件触发组合。',
+      '冲突消解：对推荐冲突、时机冲突、信息冲突进行仲裁。',
+      '体验连贯保障：保持人格一致、上下文记忆与情绪延续。',
+      '质量控制：输出审核、超时兜底与异常检测机制。',
+    ],
+    collaborators: [
+      '财富规划师（Wealth Planner）',
+      '投资策略师（Investment Strategist）',
+      '风控合规官（Risk & Compliance Officer）',
+      '投资顾问（Investment Advisor）',
+      '客户理财顾问（Client Financial Coach）',
+      '财富管家（Wealth Steward）',
+      '数据分析师（Data Analyst）',
+    ],
+  },
+  {
+    id: 'agent-3',
+    name: '风控合规官（Risk & Compliance Officer）',
+    positioning: '财富的防火墙与监管代言人',
+    coreResponsibility:
+      '守住风险底线与合规红线，在市场极端情况下快速启动保护机制，确保每笔交易安全合法。',
+    keyCapabilities: [
+      '多维风险监控：实时监测市场、信用、流动性与操作风险。',
+      '压力测试引擎：历史情景重演、假设情景与蒙特卡洛模拟。',
+      '合规审核：适当性校验、双录执行、反洗钱与投资者保护。',
+      '实时干预机制：黄/橙/红三级预警与自动熔断策略。',
+      '风险沟通：复杂指标转译为用户易懂的语言与行动建议。',
+      '应急响应：市场暴跌 30 分钟内启动保护预案并跟踪执行。',
+    ],
+    collaborators: [
+      '理财 Agent 调度协调管家（Orchestrator）',
+      '投资策略师（Investment Strategist）',
+      '投资顾问（Investment Advisor）',
+      '财富管家（Wealth Steward）',
+      '数据分析师（Data Analyst）',
+    ],
+  },
+  {
+    id: 'agent-4',
+    name: '投资策略师（Investment Strategist）',
+    positioning: '首席投资官与市场翻译官',
+    coreResponsibility:
+      '将宏观经济变化翻译成可执行的资产配置，构建全天候策略并及时响应市场波动。',
+    keyCapabilities: [
+      '宏观经济分析：经济周期、政策解读与关键指标跟踪。',
+      '资产配置方法论：战略配置、战术配置与动态再平衡设计。',
+      '行业与风格轮动：识别政策红利、产业周期与风格切换。',
+      '量化模型工具箱：估值、风险模型与择时参考的审慎应用。',
+      '投资组合构建：马科维茨、Black-Litterman 与风险预算框架。',
+      '市场解读叙事：把复杂市场逻辑转化为故事、图表与历史对比。',
+    ],
+    collaborators: [
+      '财富规划师（Wealth Planner）',
+      '风控合规官（Risk & Compliance Officer）',
+      '投资顾问（Investment Advisor）',
+      '市场研究员（Market Researcher）',
+      '数据分析师（Data Analyst）',
+    ],
+  },
+  {
+    id: 'agent-5',
+    name: '投资顾问（Investment Advisor）',
+    positioning: '产品导购专家与持仓私人医生',
+    coreResponsibility:
+      '在海量产品中筛选出真正适配用户的组合，确保用户明明白白购买、清清楚楚持有。',
+    keyCapabilities: [
+      '全产品图谱精通：覆盖公募、理财、债券、保险与另类资产。',
+      '产品筛选对比：构建多维评分、横向对比与情景分析。',
+      '产品深度研究：穿透底层资产、基金经理与隐藏成本。',
+      '持仓七维体检：收益、风险、配置、质量、成本、流动性与目标匹配评估。',
+      '利他推荐原则：坚持三不推与三必须的产品推荐准则。',
+      '办理陪伴：覆盖售前测评、售中执行与售后跟踪服务。',
+    ],
+    collaborators: [
+      '投资策略师（Investment Strategist）',
+      '客户理财顾问（Client Financial Coach）',
+      '风控合规官（Risk & Compliance Officer）',
+      '财富管家（Wealth Steward）',
+      '数据分析师（Data Analyst）',
+    ],
+  },
+  {
+    id: 'agent-6',
+    name: '市场研究员（Market Researcher）',
+    positioning: '情报分析师与机会猎手',
+    coreResponsibility:
+      '在信息过载时代筛选高价值信号，提前发现机会与风险，并输出易懂的研究洞察。',
+    keyCapabilities: [
+      '全域信息采集：汇聚 13 大信息源并完成过滤与去重。',
+      '投资机会挖掘：识别政策红利、估值洼地与行业拐点。',
+      '风险预警雷达：监控系统性、行业与个股/产品风险。',
+      '深度研究能力：撰写行业、公司与主题投资深度报告。',
+      '资讯智能推送：依据用户画像优化推送内容与时机。',
+      '翻译与叙事：将专业研报转化为通俗逻辑链与案例说明。',
+    ],
+    collaborators: [
+      '投资策略师（Investment Strategist）',
+      '投资顾问（Investment Advisor）',
+      '财富管家（Wealth Steward）',
+      '数据分析师（Data Analyst）',
+    ],
+  },
+  {
+    id: 'agent-7',
+    name: '客户理财顾问（Client Financial Coach）',
+    positioning: '心理陪伴者与决策教练',
+    coreResponsibility:
+      '帮助用户厘清“买不买、买什么、何时买”，陪伴战胜人性弱点，做出不后悔的决定。',
+    keyCapabilities: [
+      '认知偏差识别：洞察 12 种投资偏差并温和拆解误区。',
+      '心理学洞察：捕捉 6 种投资情绪，先共情再引导。',
+      '苏格拉底式提问：递进追问、挖掘深层需求并促成自我结论。',
+      '影响力运用：利他式运用影响力六原则，拆解营销套路。',
+      '高情商沟通：化解 8 类高难度对话场景与疑虑。',
+      '决策陪伴全流程：从信任建立到购后回访的一体化陪伴。',
+    ],
+    collaborators: [
+      '理财 Agent 调度协调管家（Orchestrator）',
+      '投资顾问（Investment Advisor）',
+      '风控合规官（Risk & Compliance Officer）',
+      '财富规划师（Wealth Planner）',
+    ],
+  },
+  {
+    id: 'agent-8',
+    name: '财富管家（Wealth Steward）',
+    positioning: '财务体检医生与资产优化工程师',
+    coreResponsibility:
+      '像医生一样定期为财富做体检，主动识别问题并提供优化方案，守护资产长期健康。',
+    keyCapabilities: [
+      '七维持仓体检：对收益、风险、配置、质量、成本、流动性与目标匹配做深度诊断。',
+      '闲置资金与再平衡：识别闲置资金并判断再平衡最佳时机。',
+      '产品质量监控：跟踪基金经理变动、规模异常与踩雷风险。',
+      '费率优化与替换：评估费率拖累并给出替换与节费方案。',
+      '生命事件识别：捕捉大额转账、收入波动与生命周期变化信号。',
+      '机会协同：联动研究员输出与用户画像进行精准推送。',
+    ],
+    collaborators: [
+      '财富规划师（Wealth Planner）',
+      '投资顾问（Investment Advisor）',
+      '市场研究员（Market Researcher）',
+      '风控合规官（Risk & Compliance Officer）',
+      '数据分析师（Data Analyst）',
+    ],
+  },
+  {
+    id: 'agent-meta',
+    name: '数据分析师（Data Analyst）',
+    positioning: '系统的数据中台与洞察引擎',
+    coreResponsibility:
+      '为所有 Agent 提供数据支撑，把海量数据转化为可执行洞察并反馈策略效果。',
+    keyCapabilities: [
+      '用户行为分析：识别登录频率、浏览偏好、交易习惯与流失预警信号。',
+      '用户画像与记忆同步：结合交互内容实时更新画像标签与记忆库。',
+      'A/B 测试设计：比较不同推荐策略与流程的效果。',
+      '预测建模：构建目标达成概率、流失风险与购买倾向模型。',
+      '数据可视化：将复杂数据转换为易读的图表与看板。',
+      '归因分析：定位转化失败或策略失效的根本原因。',
+    ],
+    collaborators: [
+      '理财 Agent 调度协调管家（Orchestrator）',
+      '财富规划师（Wealth Planner）',
+      '投资策略师（Investment Strategist）',
+      '投资顾问（Investment Advisor）',
+      '财富管家（Wealth Steward）',
+      '风控合规官（Risk & Compliance Officer）',
+      '市场研究员（Market Researcher）',
+      '客户理财顾问（Client Financial Coach）',
+    ],
+  },
+];
