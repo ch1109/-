@@ -1,0 +1,364 @@
+.standby-home {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #f8fafc 0%, #eef2ff 100%);
+  display: flex;
+  flex-direction: column;
+}
+
+/* 顶部导航栏 */
+.standby-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 3rem;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo {
+  font-size: 2.5rem;
+}
+
+.header-title h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #1e293b;
+}
+
+.header-title p {
+  margin: 0.25rem 0 0;
+  font-size: 0.875rem;
+  color: #64748b;
+}
+
+.header-right {
+  display: flex;
+  gap: 1rem;
+}
+
+.header-btn {
+  padding: 0.5rem 1.25rem;
+  background: transparent;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  color: #475569;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.header-btn:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+/* 主内容区 */
+.standby-main {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: 2rem;
+  padding: 2rem 3rem;
+  max-width: 1600px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* 左侧虚拟人区域 */
+.persona-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.persona-avatar {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  box-shadow: 0 10px 40px rgba(102, 126, 234, 0.3);
+}
+
+.persona-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.persona-info {
+  background: white;
+  border-radius: 1.5rem;
+  padding: 2rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.persona-badge {
+  display: inline-block;
+  padding: 0.375rem 0.875rem;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  border-radius: 2rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.persona-info h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.5rem;
+  color: #1e293b;
+}
+
+.persona-intro {
+  margin: 0 0 1.5rem;
+  color: #64748b;
+  line-height: 1.6;
+}
+
+.persona-capabilities h3 {
+  margin: 0 0 0.75rem;
+  font-size: 1rem;
+  color: #475569;
+}
+
+.persona-capabilities ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.persona-capabilities li {
+  color: #64748b;
+  font-size: 0.875rem;
+}
+
+/* 右侧功能区域 */
+.function-section {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.welcome-message {
+  text-align: center;
+}
+
+.welcome-message h2 {
+  margin: 0 0 0.5rem;
+  font-size: 2rem;
+  color: #1e293b;
+}
+
+.welcome-message p {
+  margin: 0;
+  color: #64748b;
+  font-size: 1.125rem;
+}
+
+/* 主要入口按钮 */
+.main-entries {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.entry-button {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 2rem;
+  background: white;
+  border: 2px solid #e2e8f0;
+  border-radius: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-align: left;
+}
+
+.entry-button:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.entry-button.flow-a {
+  border-color: #3b82f6;
+}
+
+.entry-button.flow-a:hover {
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+  border-color: #2563eb;
+}
+
+.entry-button.flow-b {
+  border-color: #8b5cf6;
+}
+
+.entry-button.flow-b:hover {
+  background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+  border-color: #7c3aed;
+}
+
+.entry-icon {
+  font-size: 3rem;
+  flex-shrink: 0;
+}
+
+.entry-content {
+  flex: 1;
+}
+
+.entry-content h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.25rem;
+  color: #1e293b;
+}
+
+.entry-content p {
+  margin: 0 0 0.75rem;
+  color: #64748b;
+  font-size: 0.875rem;
+}
+
+.entry-features {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.entry-features span {
+  font-size: 0.75rem;
+  color: #64748b;
+  background: #f1f5f9;
+  padding: 0.25rem 0.625rem;
+  border-radius: 0.375rem;
+}
+
+.entry-arrow {
+  font-size: 2rem;
+  color: #cbd5e1;
+  transition: all 0.3s;
+}
+
+.entry-button:hover .entry-arrow {
+  transform: translateX(8px);
+  color: #3b82f6;
+}
+
+/* 快捷问题 */
+.quick-prompts {
+  background: white;
+  border-radius: 1.5rem;
+  padding: 2rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.quick-prompts h3 {
+  margin: 0 0 1rem;
+  font-size: 1.125rem;
+  color: #1e293b;
+}
+
+.prompt-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+
+.prompt-button {
+  padding: 0.875rem 1.25rem;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  color: #475569;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+}
+
+.prompt-button:hover {
+  background: #eff6ff;
+  border-color: #3b82f6;
+  color: #1e40af;
+}
+
+/* 功能卡片网格 */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.feature-card {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.feature-card:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.feature-icon {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.feature-card h4 {
+  margin: 0 0 0.375rem;
+  font-size: 1rem;
+  color: #1e293b;
+}
+
+.feature-card p {
+  margin: 0;
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+/* 隐私提示 */
+.privacy-notice {
+  display: flex;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border-radius: 1rem;
+  border: 1px solid #fbbf24;
+}
+
+.notice-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.notice-content strong {
+  display: block;
+  margin-bottom: 0.25rem;
+  color: #92400e;
+  font-size: 0.875rem;
+}
+
+.notice-content p {
+  margin: 0;
+  color: #b45309;
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+

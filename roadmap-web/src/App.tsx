@@ -3,7 +3,6 @@ import type { CSSProperties, ReactElement } from 'react'
 import {
   phases,
   agents,
-  capabilityLevels,
   featurePriorities,
   mvpFlowSummaries,
   mvpLoopStages,
@@ -36,14 +35,15 @@ import type {
   NodeInsight,
 } from './types/roadmap'
 import avatarImage from './assets/agent-avatar.png'
+import { FinancialPrototype } from './components/FinancialPrototype'
 import './App.css'
 
 type ViewMode =
+  | 'financial-prototype'
   | 'prototype'
   | 'journey'
   | 'agents'
   | 'data'
-  | 'capabilities'
   | 'priorities'
   | 'matrix'
   | 'insight'
@@ -67,6 +67,11 @@ const viewModes: Array<{
   description: string
 }> = [
   {
+    id: 'financial-prototype',
+    label: '🚀 金融原型机交互演示',
+    description: '双区域协同交互 - 流程A & 流程B',
+  },
+  {
     id: 'prototype',
     label: '金融原型机首页',
     description: '待机态与工作态的双屏展示。',
@@ -85,11 +90,6 @@ const viewModes: Array<{
     id: 'data',
     label: '数据需求',
     description: '银行与证券关键数据、用途与协同价值。',
-  },
-  {
-    id: 'capabilities',
-    label: '能力实现',
-    description: '数据条件与能力表现对照表。',
   },
   {
     id: 'priorities',
@@ -306,7 +306,7 @@ const renderTriggerBadges = (insight?: NodeInsight) => {
 }
 
 function App() {
-  const [viewMode, setViewMode] = useState<ViewMode>('journey')
+  const [viewMode, setViewMode] = useState<ViewMode>('financial-prototype')
   const [prototypeMode, setPrototypeMode] = useState<PrototypeMode>('standby')
   const [activeScenarioId, setActiveScenarioId] = useState<ScenarioId | null>(null)
   const [scenarioStepIndex, setScenarioStepIndex] = useState(0)
@@ -465,22 +465,12 @@ function App() {
 
     return (
       <div className="scenario-step">
-        <header className="scenario-header">
-          <div className="scenario-heading">
-            <span className="scenario-time">{step.time}</span>
-            <div className="scenario-headline">
-              <span className="scenario-badge">{badge}</span>
-              <h4>{formatWithContext(step.title, context)}</h4>
-            </div>
-          </div>
-          {workspace.progress && (
+        {/* 移除了时间标记、badge和步骤标题 */}
+        {workspace.progress && (
+          <div className="scenario-progress-indicator">
             <span className="scenario-progress">{formatWithContext(workspace.progress, context)}</span>
-          )}
-        </header>
-        <div className="scenario-body">
-          <h5>{headline}</h5>
-          {hasDescription && <p>{description}</p>}
-        </div>
+          </div>
+        )}
         {workspace.tags && workspace.tags.length > 0 && (
           <div className="scenario-tags">
             {workspace.tags.map((tag) => (
@@ -547,16 +537,7 @@ function App() {
 
     return (
       <div className="scenario-step scenario-chat">
-        <header className="scenario-header">
-          <div className="scenario-heading">
-            <span className="scenario-time">{step.time}</span>
-            <div className="scenario-headline">
-              <span className="scenario-badge">{badge}</span>
-              <h4>{formatWithContext(step.title, context)}</h4>
-            </div>
-          </div>
-        </header>
-        {chat.headline && <p className="scenario-subtitle">{formatWithContext(chat.headline, context)}</p>}
+        {/* 移除了时间标记、badge和步骤标题 */}
         {chat.pinned && (
           <div className="scenario-pinned">
             <strong>{formatWithContext(chat.pinned.title, context)}</strong>
@@ -609,8 +590,9 @@ function App() {
         <div>
           <h2>AI 金融原型机 · {isStandby ? '待机态' : '工作态'}</h2>
           <p className="muted">
-            {isScenarioActive && activeScenario && activeStep
-              ? `${activeScenario.buttonLabel} ｜ ${formatWithContext(activeStep.title, scenarioContext)}`
+            {/* 移除了步骤标题显示,只显示场景名称 */}
+            {isScenarioActive && activeScenario
+              ? activeScenario.buttonLabel
               : isStandby
                 ? '待机态通过虚拟人大堂经理介绍银行 AI 自助业务，突出热门办理入口与隐私提示。'
                 : '工作态围绕实时办理请求展开，Agent 工作区与聊天区协同，可随时邀请人工客服接力。'}
@@ -733,13 +715,7 @@ function App() {
           <header className="workspace-header">
             <div>
               <h3>Agent 工作区</h3>
-              <span>
-                {activeStep
-                  ? `${activeStep.time} · ${formatWithContext(activeStep.title, scenarioContext)}`
-                  : isStandby
-                    ? '智能引导银行业务办理，快速响应来访客户'
-                    : '已接通客户请求，持续同步办理进度'}
-              </span>
+              {/* 移除了时间和步骤标题显示 */}
             </div>
             {!activeStep && (
               <div className="workspace-toolbar">
@@ -829,13 +805,7 @@ function App() {
         <section className="prototype-panel chat-panel">
           <div className="panel-header">
             <h3>聊天交互区</h3>
-            <span>
-              {activeStep
-                ? `${activeStep.time} · ${formatWithContext(activeStep.title, scenarioContext)}`
-                : isStandby
-                  ? '语音 / 触控双入口'
-                  : '实时对话记录'}
-            </span>
+            {/* 移除了时间和步骤标题显示 */}
           </div>
 
           {activeStep
@@ -970,6 +940,8 @@ function App() {
       </header>
 
       <main className="app-main">
+        {viewMode === 'financial-prototype' && <FinancialPrototype />}
+
         {viewMode === 'prototype' && renderPrototypeView()}
 
         {viewMode === 'journey' && (
@@ -1144,27 +1116,6 @@ function App() {
                 </tbody>
               </table>
             </article>
-          </section>
-        )}
-
-        {viewMode === 'capabilities' && (
-          <section className="panel-grid">
-            {capabilityLevels.map((level) => (
-              <article key={level.id} className="panel-card">
-                <header>
-                  <h2>{level.label}</h2>
-                </header>
-                <p>{level.performance}</p>
-                <p className="muted">数据条件：{level.dataConditions}</p>
-                <p className="muted">用户感知：{level.userPerception}</p>
-                <h3>示例</h3>
-                <ul>
-                  {level.examples.map((example) => (
-                    <li key={example}>{example}</li>
-                  ))}
-                </ul>
-              </article>
-            ))}
           </section>
         )}
 

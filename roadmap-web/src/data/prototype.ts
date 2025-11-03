@@ -1,4 +1,7 @@
 // Auto-generated from dist prototype data
+// 导入增强版场景数据
+import { enhancedScenarios } from './prototype-enhanced';
+
 export const prototypeModeSummaries = {
   "standby": "面向来访客户提供欢迎与业务导航，降低首次体验成本。",
   "active": "陪伴用户实时办理业务，提醒隐私与合规要点。"
@@ -1083,5 +1086,7 @@ export const prototypeScenarios = [
         }
       }
     ]
-  }
+  },
+  // 添加增强版场景
+  ...enhancedScenarios
 ] as const;

@@ -1,6 +1,5 @@
 export { phases } from './phases';
 export { agents } from './agents';
-export { capabilityLevels } from './capabilityLevels';
 export { featurePriorities } from './featurePriorities';
 export {
   mvpFlowSummaries,
