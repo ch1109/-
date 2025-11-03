@@ -1,0 +1,389 @@
+/* 三区域介绍模块 */
+.three-areas-intro {
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  padding: 4rem 3rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.intro-container {
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.intro-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.intro-header h2 {
+  margin: 0 0 0.75rem;
+  font-size: 2.25rem;
+  color: #1e293b;
+  font-weight: 700;
+}
+
+.intro-header p {
+  margin: 0;
+  font-size: 1.125rem;
+  color: #64748b;
+}
+
+.areas-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+/* 区域卡片通用样式 */
+.area-card {
+  background: white;
+  border-radius: 1.5rem;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 2px solid transparent;
+}
+
+.area-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+}
+
+.area-card.persona-area {
+  border-color: #3b82f6;
+}
+
+.area-card.persona-area:hover {
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+}
+
+.area-card.agent-area {
+  border-color: #8b5cf6;
+}
+
+.area-card.agent-area:hover {
+  background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+}
+
+.area-card.chat-area {
+  border-color: #10b981;
+}
+
+.area-card.chat-area:hover {
+  background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+}
+
+.area-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #f1f5f9;
+}
+
+.area-icon {
+  font-size: 2.5rem;
+  flex-shrink: 0;
+}
+
+.area-header h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #1e293b;
+  flex: 1;
+}
+
+.area-badge {
+  padding: 0.375rem 0.875rem;
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+  border-radius: 2rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.area-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.area-description p {
+  margin: 0;
+  color: #64748b;
+  line-height: 1.6;
+  font-size: 0.9375rem;
+}
+
+/* 虚拟人区域 - 角色时间线 */
+.role-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.role-item {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: 1rem;
+  background: #f8fafc;
+  border-radius: 0.75rem;
+  transition: all 0.2s;
+}
+
+.role-item:hover {
+  background: #eff6ff;
+  transform: translateX(4px);
+}
+
+.role-number {
+  width: 2rem;
+  height: 2rem;
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.875rem;
+  flex-shrink: 0;
+}
+
+.role-info h4 {
+  margin: 0 0 0.25rem;
+  font-size: 0.9375rem;
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.role-info p {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: #64748b;
+  line-height: 1.5;
+}
+
+/* Agent工作区 - 状态列表 */
+.agent-states {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.state-item {
+  padding: 1.25rem;
+  background: #f8fafc;
+  border-radius: 0.75rem;
+  border-left: 4px solid #8b5cf6;
+  transition: all 0.2s;
+}
+
+.state-item:hover {
+  background: #f5f3ff;
+  border-left-width: 6px;
+}
+
+.state-badge {
+  display: inline-block;
+  padding: 0.25rem 0.625rem;
+  border-radius: 0.375rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.state-badge.state-1 {
+  background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+  color: white;
+}
+
+.state-badge.state-2 {
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+  color: white;
+}
+
+.state-badge.state-3 {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: white;
+}
+
+.state-item h4 {
+  margin: 0 0 0.375rem;
+  font-size: 1rem;
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.state-item > p {
+  margin: 0 0 0.75rem;
+  font-size: 0.8125rem;
+  color: #8b5cf6;
+  font-weight: 600;
+}
+
+.state-item ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.state-item li {
+  font-size: 0.8125rem;
+  color: #64748b;
+  padding-left: 1.25rem;
+  position: relative;
+}
+
+.state-item li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: #8b5cf6;
+  font-weight: 700;
+}
+
+/* 聊天交互区 - 模式展示 */
+.chat-modes {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.mode-item {
+  padding: 1.25rem;
+  background: #f8fafc;
+  border-radius: 0.75rem;
+  transition: all 0.2s;
+}
+
+.mode-item:hover {
+  background: #ecfdf5;
+}
+
+.mode-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.mode-icon {
+  font-size: 1.5rem;
+}
+
+.mode-header h4 {
+  margin: 0;
+  font-size: 1rem;
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.mode-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.feature-tag {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.75rem;
+  background: white;
+  border: 1px solid #d1fae5;
+  border-radius: 2rem;
+  font-size: 0.75rem;
+  color: #065f46;
+  transition: all 0.2s;
+}
+
+.feature-tag:hover {
+  background: #d1fae5;
+  border-color: #10b981;
+}
+
+.tag-icon {
+  font-size: 0.875rem;
+}
+
+.mode-desc {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: #64748b;
+  line-height: 1.5;
+}
+
+/* 底部总结 */
+.intro-footer {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  border: 2px solid #fbbf24;
+}
+
+.footer-highlight {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.highlight-icon {
+  font-size: 3rem;
+  flex-shrink: 0;
+}
+
+.highlight-content h4 {
+  margin: 0 0 0.5rem;
+  font-size: 1.25rem;
+  color: #92400e;
+  font-weight: 700;
+}
+
+.highlight-content p {
+  margin: 0;
+  font-size: 1rem;
+  color: #b45309;
+  line-height: 1.6;
+}
+
+/* 响应式设计 */
+@media (max-width: 1400px) {
+  .areas-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .three-areas-intro {
+    padding: 2rem 1.5rem;
+  }
+
+  .intro-header h2 {
+    font-size: 1.75rem;
+  }
+
+  .intro-header p {
+    font-size: 1rem;
+  }
+
+  .area-card {
+    padding: 1.5rem;
+  }
+
+  .footer-highlight {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+

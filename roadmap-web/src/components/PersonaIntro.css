@@ -1,0 +1,192 @@
+/* 虚拟人介绍区域 */
+.persona-intro-section {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 1.5rem;
+  padding: 0;
+  overflow-y: auto;
+}
+
+/* 虚拟人头像 - 保持原有大小和位置 */
+.persona-intro-avatar {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  width: 100%;
+  max-width: 340px;
+  flex: 0 0 auto;
+  margin: 0 auto;
+}
+
+.persona-intro-avatar figure {
+  margin: 0;
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  height: clamp(400px, 58vh, 490px);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  border-radius: 2rem;
+  background: linear-gradient(160deg, rgba(42, 107, 242, 0.18), rgba(120, 144, 255, 0.45));
+  border: 1px solid rgba(42, 107, 242, 0.25);
+  overflow: hidden;
+}
+
+.persona-intro-avatar img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  transform: scale(1.38) translateY(-3%);
+  transform-origin: center bottom;
+}
+
+/* 介绍内容 - 紧凑排版 */
+.persona-intro-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  text-align: center;
+  flex: 0 0 auto;
+  padding: 0 1rem;
+}
+
+/* 徽章 */
+.intro-badge {
+  display: inline-block;
+  align-self: center;
+  padding: 0.35rem 0.85rem;
+  background: #dbeafe;
+  color: #1e40af;
+  border-radius: 0.375rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* 标题 */
+.persona-intro-content h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: #1f2937;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+/* 副标题 */
+.intro-subtitle {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #475569;
+  line-height: 1.6;
+}
+
+/* 分点列表 */
+.intro-points {
+  list-style: none;
+  margin: 0.5rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  text-align: left;
+}
+
+.intro-points li {
+  position: relative;
+  padding-left: 1.1rem;
+  font-size: 0.875rem;
+  color: #475569;
+  line-height: 1.55;
+}
+
+.intro-points li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55rem;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 999px;
+  background: rgba(42, 107, 242, 0.65);
+}
+
+/* 价值呈现 */
+.intro-value {
+  margin: 0.5rem 0 0;
+  font-size: 0.875rem;
+  color: #475569;
+  line-height: 1.6;
+}
+
+/* 滚动条美化 */
+.persona-intro-section::-webkit-scrollbar {
+  width: 6px;
+}
+
+.persona-intro-section::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.persona-intro-section::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+.persona-intro-section::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* 响应式设计 */
+@media (max-width: 1024px) {
+  .persona-intro-content {
+    padding: 0 0.75rem;
+  }
+
+  .persona-intro-content h2 {
+    font-size: 1.125rem;
+  }
+
+  .intro-subtitle,
+  .intro-points li,
+  .intro-value {
+    font-size: 0.8125rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .persona-intro-section {
+    gap: 1rem;
+  }
+
+  .persona-intro-avatar figure {
+    height: clamp(300px, 40vh, 350px);
+  }
+
+  .persona-intro-content {
+    padding: 0 0.5rem;
+  }
+
+  .persona-intro-content h2 {
+    font-size: 1rem;
+  }
+
+  .intro-subtitle,
+  .intro-points li,
+  .intro-value {
+    font-size: 0.75rem;
+  }
+
+  .intro-points li {
+    padding-left: 0.9rem;
+  }
+
+  .intro-points li::before {
+    width: 0.35rem;
+    height: 0.35rem;
+    top: 0.5rem;
+  }
+}
+

@@ -77,9 +77,8 @@ export const FlowB: React.FC<FlowBProps> = ({ onBack }) => {
 
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [inputValue, setInputValue] = useState('');
-  const [hoverTime, setHoverTime] = useState<number>(0);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const hoverTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const hoverTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -112,6 +111,7 @@ export const FlowB: React.FC<FlowBProps> = ({ onBack }) => {
       return () => {
         if (hoverTimerRef.current) {
           clearTimeout(hoverTimerRef.current);
+          hoverTimerRef.current = null;
         }
       };
     }
@@ -502,4 +502,3 @@ export const FlowB: React.FC<FlowBProps> = ({ onBack }) => {
     </div>
   );
 };
-

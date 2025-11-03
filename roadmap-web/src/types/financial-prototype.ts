@@ -26,11 +26,14 @@ export interface ThinkingProcess {
 
 // Agent协同日志
 export interface AgentLog {
-  id: string;
-  agentName: string;
+  id?: string;
+  agentName?: string;
+  agent?: string;
   action: string;
-  timestamp: number;
+  timestamp?: number;
   status: 'pending' | 'processing' | 'completed';
+  result?: string;
+  duration?: string;
 }
 
 // 用户画像数据

@@ -6,8 +6,6 @@ import {
   featurePriorities,
   mvpFlowSummaries,
   mvpLoopStages,
-  mvpDecisionSteps,
-  mvpBoundaryQuestions,
   matrixCategories,
   matrixRoles,
   roleStageMatrix,
@@ -36,6 +34,8 @@ import type {
 } from './types/roadmap'
 import avatarImage from './assets/agent-avatar.png'
 import { FinancialPrototype } from './components/FinancialPrototype'
+import { ThreeAreasIntro } from './components/ThreeAreasIntro'
+import { PersonaIntro } from './components/PersonaIntro'
 import './App.css'
 
 type ViewMode =
@@ -67,14 +67,14 @@ const viewModes: Array<{
   description: string
 }> = [
   {
-    id: 'financial-prototype',
-    label: '🚀 金融原型机交互演示',
-    description: '双区域协同交互 - 流程A & 流程B',
-  },
-  {
     id: 'prototype',
     label: '金融原型机首页',
     description: '待机态与工作态的双屏展示。',
+  },
+  {
+    id: 'financial-prototype',
+    label: '🚀 金融原型机交互演示',
+    description: '双区域协同交互 - 流程A & 流程B',
   },
   {
     id: 'journey',
@@ -375,7 +375,7 @@ const renderTriggerBadges = (insight?: NodeInsight) => {
 }
 
 function App() {
-  const [viewMode, setViewMode] = useState<ViewMode>('financial-prototype')
+  const [viewMode, setViewMode] = useState<ViewMode>('prototype')
   const [prototypeMode, setPrototypeMode] = useState<PrototypeMode>('standby')
   const [activeScenarioId, setActiveScenarioId] = useState<ScenarioId | null>(null)
   const [scenarioStepIndex, setScenarioStepIndex] = useState(0)
@@ -532,10 +532,6 @@ function App() {
 
   const renderScenarioWorkspace = (step: ScenarioStep, context: ScenarioContextMap) => {
     const { workspace } = step
-    const badge = formatWithContext(workspace.badge, context)
-    const headline = formatWithContext(workspace.headline, context)
-    const description = formatWithContext(workspace.description, context)
-    const hasDescription = description.trim().length > 0
 
     return (
       <div className="scenario-step">
@@ -607,7 +603,6 @@ function App() {
 
   const renderScenarioChat = (step: ScenarioStep, context: ScenarioContextMap) => {
     const { chat } = step
-    const badge = formatWithContext(chat.badge, context)
 
     return (
       <div className="scenario-step scenario-chat">
@@ -762,28 +757,36 @@ function App() {
       ) : null}
 
       <div className={`prototype-layout ${isStandby ? 'standby' : 'active'}`}>
-        <section className="prototype-panel persona-panel">
-          <div className="persona-frame">
-            <figure>
-              <img src={avatarImage} alt="重庆银行AI理财经理" />
-            </figure>
-          </div>
-          <div className="persona-info">
-            <span className="persona-chip">{personaBadge}</span>
-            <h3>大堂 / 理财规划经理</h3>
-            <p className="muted">{personaSummary}</p>
-            {activeStep?.persona?.speech && (
-              <div className="persona-speech">
-                <p>{formatWithContext(activeStep.persona.speech, scenarioContext)}</p>
+        <div className="prototype-panel persona-panel">
+          {isScenarioActive ? (
+            // 演示场景时显示原有的虚拟人信息
+            <section className="persona-info-section">
+              <div className="persona-frame">
+                <figure>
+                  <img src={avatarImage} alt="重庆银行AI理财经理" />
+                </figure>
               </div>
-            )}
-            <ul>
-              {personaNotes.map((note) => (
-                <li key={note}>{note}</li>
-              ))}
-            </ul>
-          </div>
-        </section>
+              <div className="persona-info">
+                <span className="persona-chip">{personaBadge}</span>
+                <h3>大堂 / 理财规划经理</h3>
+                <p className="muted">{personaSummary}</p>
+                {activeStep?.persona?.speech && (
+                  <div className="persona-speech">
+                    <p>{formatWithContext(activeStep.persona.speech, scenarioContext)}</p>
+                  </div>
+                )}
+                <ul>
+                  {personaNotes.map((note) => (
+                    <li key={note}>{note}</li>
+                  ))}
+                </ul>
+              </div>
+            </section>
+          ) : (
+            // 非演示场景时显示虚拟人介绍
+            <PersonaIntro avatarImage={avatarImage} />
+          )}
+        </div>
 
         <section className="prototype-panel workspace-panel">
           <header className="workspace-header">
@@ -943,6 +946,9 @@ function App() {
               )}
         </section>
       </div>
+
+      {/* 三区域介绍模块 */}
+      <ThreeAreasIntro />
     </div>
   )
 
@@ -1404,31 +1410,6 @@ function App() {
                   </div>
                 </article>
               ))}
-            </section>
-
-            <section className="panel-grid">
-              {mvpDecisionSteps.map((step) => (
-                <article key={step.id} className="panel-card">
-                  <header>
-                    <h2>{step.label}</h2>
-                  </header>
-                  <ol>
-                    {step.actions.map((action) => (
-                      <li key={action}>{action}</li>
-                    ))}
-                  </ol>
-                </article>
-              ))}
-              <article className="panel-card">
-                <header>
-                  <h2>MVP边界检验问题</h2>
-                </header>
-                <ul>
-                  {mvpBoundaryQuestions.map((question) => (
-                    <li key={question}>{question}</li>
-                  ))}
-                </ul>
-              </article>
             </section>
           </div>
         )}

@@ -47,28 +47,28 @@ export const FlowA: React.FC<FlowAProps> = ({ onBack }) => {
         },
         agentLogs: [
           {
-            agent: '意图识别引擎',
+            agentName: '意图识别引擎',
             action: '分析用户输入',
             status: 'completed',
             result: '识别为: 教育金规划场景',
             duration: '0.3秒',
           },
           {
-            agent: '数据分析师',
+            agentName: '数据分析师',
             action: '调取用户基础画像',
             status: 'completed',
             result: '用户类型: 新客户 | 家庭结构: 待确认',
             duration: '0.5秒',
           },
           {
-            agent: '财富规划师',
+            agentName: '财富规划师',
             action: '加载教育金规划模板',
             status: 'completed',
             result: '生成问题清单(5个核心问题)',
             duration: '0.8秒',
           },
           {
-            agent: '市场研究员',
+            agentName: '市场研究员',
             action: '查询最新教育成本数据',
             status: 'completed',
             result: '国内本科: 30-50万/4年 | 海外留学: 80-150万/4年',
@@ -198,57 +198,6 @@ export const FlowA: React.FC<FlowAProps> = ({ onBack }) => {
     }
   };
 
-  const handleAnswer = (value: number) => {
-    const questions = [
-      { field: 'childAge' as keyof UserProfile, radarIndex: 4 },
-      { field: 'targetAmount' as keyof UserProfile, radarIndex: 4 },
-      { field: 'monthlyIncome' as keyof UserProfile, radarIndex: 0 },
-      { field: 'monthlyExpense' as keyof UserProfile, radarIndex: 1 },
-      { field: 'currentSavings' as keyof UserProfile, radarIndex: 1 },
-    ];
-
-    const currentQ = questions[state.questionIndex];
-    
-    // 更新用户画像
-    const newProfile = { ...state.userProfile, [currentQ.field]: value };
-    
-    // 更新雷达图
-    const newRadarValues = [...state.radarData.values];
-    newRadarValues[currentQ.radarIndex] = Math.min(100, newRadarValues[currentQ.radarIndex] + 20);
-    
-    // 添加用户消息
-    addMessage({
-      role: 'user',
-      content: `${value}${currentQ.field === 'childAge' ? '岁' : currentQ.field.includes('Amount') ? '万元' : '元'}`,
-    });
-
-    // 添加AI确认消息
-    setTimeout(() => {
-      const confirmations = [
-        `好的,也就是${18 - value}年后需要。`,
-        '明白了,这是一个合理的目标。',
-        '了解了您的收入情况。',
-        '好的,我记录下来了。',
-        '明白,这部分资金可以作为初始投入。',
-      ];
-      
-      addMessage({
-        role: 'ai',
-        content: confirmations[state.questionIndex],
-      });
-
-      setState(prev => ({
-        ...prev,
-        userProfile: newProfile,
-        radarData: { ...prev.radarData, values: newRadarValues },
-        questionIndex: prev.questionIndex + 1,
-      }));
-
-      // 继续下一个问题
-      setTimeout(askNextQuestion, 800);
-    }, 500);
-  };
-
   const performFeasibilityAssessment = () => {
     setState(prev => ({ ...prev, currentStage: 'feasibility', isGenerating: true, progress: 0 }));
 
@@ -282,7 +231,7 @@ export const FlowA: React.FC<FlowAProps> = ({ onBack }) => {
   };
 
   const showFeasibilityResult = () => {
-    const { targetAmount = 50, monthlyIncome = 20000, monthlyExpense = 10000, childAge = 3 } = state.userProfile;
+    const { targetAmount = 50, monthlyIncome = 20000, childAge = 3 } = state.userProfile;
     const yearsToGoal = 18 - childAge;
     const monthlySavingsNeeded = (targetAmount * 10000) / (yearsToGoal * 12);
     const savingsRate = (monthlySavingsNeeded / monthlyIncome) * 100;
@@ -597,4 +546,3 @@ export const FlowA: React.FC<FlowAProps> = ({ onBack }) => {
     </div>
   );
 };
-
