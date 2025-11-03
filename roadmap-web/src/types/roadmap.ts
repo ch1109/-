@@ -121,6 +121,11 @@ export interface TriggerBreakdown {
   time: string;
 }
 
+export interface CoreFeatureDetail {
+  title: string;
+  description: string;
+}
+
 export interface NodeInsight {
   nodeId: string;
   label: string;
@@ -130,7 +135,8 @@ export interface NodeInsight {
   requiredCapabilities: string[];
   requiredData: string[];
   dataSupportedFunctions: string[];
-  productFeatures: string[];
+  coreFeaturesPreview?: string[];
+  coreFeaturesFull?: CoreFeatureDetail[];
 }
 
 export interface DataNeedRow {

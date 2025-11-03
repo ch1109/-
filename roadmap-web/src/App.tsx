@@ -29,7 +29,7 @@ import {
   prototypeScenarios,
 } from './data/prototype'
 import type {
-  JourneyNode,
+  JourneyNodeInsight,
   MatrixCategory,
   RoleStageCell,
   NodeInsight,
@@ -240,39 +240,108 @@ const formatWithContext = (value: string | undefined, context: ScenarioContextMa
 
 const statusClass = (status?: ScenarioLogStatus) => (status ? `status-${status}` : '')
 
-const tooltipFromNodeInsights = (node: JourneyNode | undefined): string => {
-  if (!node?.insights) return ''
-  const { insights } = node
-  const sections: string[] = []
-  const addSection = (title: string, items?: string[]) => {
-    if (items && items.length > 0) {
-      sections.push(`【${title}】\n• ${items.join('\n• ')}`)
-    }
-  }
-  addSection('用户操作', insights.userActions)
-  addSection('AI目标', insights.aiGoals)
-  addSection('痛点', insights.painPoints)
-  addSection('痒点', insights.itchPoints)
-  addSection('爽点', insights.delightPoints)
-  return sections.join('\n\n')
+const JOURNEY_INSIGHT_SECTIONS: Array<{ key: keyof JourneyNodeInsight; label: string }> = [
+  { key: 'userActions', label: '用户操作' },
+  { key: 'aiGoals', label: 'AI目标' },
+  { key: 'painPoints', label: '痛点' },
+  { key: 'itchPoints', label: '痒点' },
+  { key: 'delightPoints', label: '爽点' },
+]
+
+type JourneyInsightSection = {
+  label: string
+  items: string[]
 }
 
-const formatListPill = (values?: string[]) => {
+const getNodeInsightSections = (insights?: JourneyNodeInsight): JourneyInsightSection[] => {
+  if (!insights) return []
+  const sections: JourneyInsightSection[] = []
+  for (const { key, label } of JOURNEY_INSIGHT_SECTIONS) {
+    const rawItems = insights[key]
+    if (!rawItems) continue
+    const items = rawItems.map((item) => item.trim()).filter((item) => item.length > 0)
+    if (items.length === 0) continue
+    sections.push({ label, items })
+  }
+  return sections
+}
+
+const stripParenthetical = (value: string): string => {
+  return value
+    .replace(/\s*（[^）]*）/g, '')
+    .replace(/\s*\([^)]*\)/g, '')
+    .replace(/[ 　]{2,}/g, ' ')
+    .replace(/\n[ \t]+/g, '\n')
+    .trim()
+}
+
+const formatListPill = (values?: string[], transform?: (value: string) => string) => {
   if (!values || values.length === 0) {
     return <span className="insight-missing">待补充</span>
   }
-  const [first, ...rest] = values
-  const tooltip = `• ${values.join('\n• ')}`
+  const processed = (transform ? values.map(transform) : values)
+    .map((item) => item.trim())
+    .filter((item) => item.length > 0)
+  if (processed.length === 0) {
+    return <span className="insight-missing">待补充</span>
+  }
   return (
-    <span className="tooltip list-pill" data-tooltip={tooltip}>
-      {first}
-      {rest.length > 0 && (
-        <em>
-          {' '}
-          +{rest.length}
-        </em>
-      )}
-    </span>
+    <div className="insight-list">
+      {processed.map((item, index) => (
+        <span key={`${item}-${index}`} className="list-pill">
+          {item}
+        </span>
+      ))}
+    </div>
+  )
+}
+
+const renderCoreFeatures = (insight?: NodeInsight) => {
+  if (!insight) {
+    return <span className="insight-missing">待补充</span>
+  }
+
+  const preview = insight.coreFeaturesPreview?.length
+    ? insight.coreFeaturesPreview
+    : insight.coreFunctions
+  const details = insight.coreFeaturesFull
+  const processedDetails =
+    details?.map((item) => ({
+      label: stripParenthetical(item.title),
+      description: stripParenthetical(item.description ?? ''),
+    })) ?? []
+
+  const items =
+    preview?.length && preview.some((item) => item.trim().length > 0)
+      ? preview
+          .map((item, index) => ({
+            label: stripParenthetical(item),
+            description: processedDetails[index]?.description ?? '',
+          }))
+          .filter((entry) => entry.label.length > 0)
+      : processedDetails.filter((entry) => entry.label.length > 0)
+
+  if (items.length === 0) {
+    return <span className="insight-missing">待补充</span>
+  }
+
+  return (
+    <div className="insight-list">
+      {items.map((item, index) => {
+        const hasDescription = Boolean(item.description && item.description.length > 0)
+        return (
+          <span
+            key={`${item.label}-${index}`}
+            className={`list-pill${hasDescription ? ' tooltip' : ''}`}
+            data-tooltip={
+              hasDescription ? `• ${item.label}\n  ${item.description}` : undefined
+            }
+          >
+            {item.label}
+          </span>
+        )
+      })}
+    </div>
   )
 }
 
@@ -355,6 +424,11 @@ function App() {
   const selectedNode = useMemo(
     () => allNodes.find((node) => node.id === selectedNodeId),
     [allNodes, selectedNodeId],
+  )
+
+  const selectedNodeInsightSections = useMemo(
+    () => getNodeInsightSections(selectedNode?.insights),
+    [selectedNode],
   )
 
   const goToScenarioStep = (index: number) => {
@@ -901,12 +975,16 @@ function App() {
     render: (insight?: NodeInsight) => ReactElement
   }> = [
     { id: 'triggers', label: '触发条件', render: (insight) => renderTriggerBadges(insight) },
-    { id: 'roles', label: '服务AI角色', render: (insight) => formatListPill(insight?.aiRoles) },
-    { id: 'functions', label: '核心功能', render: (insight) => formatListPill(insight?.coreFunctions) },
+    {
+      id: 'roles',
+      label: '服务AI角色',
+      render: (insight) => formatListPill(insight?.aiRoles, stripParenthetical),
+    },
+    { id: 'functions', label: '核心功能', render: (insight) => renderCoreFeatures(insight) },
     {
       id: 'capabilities',
       label: '需要的能力',
-      render: (insight) => formatListPill(insight?.requiredCapabilities),
+      render: (insight) => formatListPill(insight?.requiredCapabilities, stripParenthetical),
     },
     { id: 'data', label: '需要的数据', render: (insight) => formatListPill(insight?.requiredData) },
     {
@@ -914,7 +992,6 @@ function App() {
       label: '数据支持的功能',
       render: (insight) => formatListPill(insight?.dataSupportedFunctions),
     },
-    { id: 'product', label: '产品功能', render: (insight) => formatListPill(insight?.productFeatures) },
   ]
 
   return (
@@ -957,13 +1034,11 @@ function App() {
                   <div className="node-stack">
                     {phase.nodes.map((node) => {
                       const isActive = node.id === selectedNodeId
-                      const tooltip = tooltipFromNodeInsights(node)
                       return (
                         <button
                           key={node.id}
                           type="button"
-                          className={`node-card ${isActive ? 'is-active' : ''} ${tooltip ? 'tooltip' : ''}`}
-                          data-tooltip={tooltip || undefined}
+                          className={`node-card ${isActive ? 'is-active' : ''}`}
                           onClick={() => setSelectedNodeId(node.id)}
                         >
                           <div className="node-title">
@@ -1005,6 +1080,21 @@ function App() {
                       ))}
                     </ul>
                   </section>
+                  {selectedNodeInsightSections.length > 0 && (
+                    <section className="node-insights">
+                      <h3>节点洞察</h3>
+                      {selectedNodeInsightSections.map((section) => (
+                        <div key={section.label} className="insight-group">
+                          <h4>{section.label}</h4>
+                          <ul>
+                            {section.items.map((item, index) => (
+                              <li key={`${section.label}-${index}`}>{item}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </section>
+                  )}
                   {selectedNode.notes && (
                     <section>
                       <h3>补充说明</h3>
@@ -1028,18 +1118,23 @@ function App() {
             {agents.map((agent) => (
               <article key={agent.id} className="panel-card">
                 <header>
-                  <h2>{agent.name}</h2>
-                  <p className="muted">{agent.positioning}</p>
+                  <h2>{stripParenthetical(agent.name)}</h2>
+                  <p className="muted">{stripParenthetical(agent.positioning)}</p>
                 </header>
-                <p className="muted">{agent.coreResponsibility}</p>
+                <p className="muted">{stripParenthetical(agent.coreResponsibility)}</p>
                 <h3>关键能力</h3>
                 <ul>
                   {agent.keyCapabilities.map((capability) => (
-                    <li key={capability}>{capability}</li>
+                    <li key={capability}>{stripParenthetical(capability)}</li>
                   ))}
                 </ul>
                 <h3>协同角色</h3>
-                <p>{agent.collaborators.join('、')}</p>
+                <p>
+                  {agent.collaborators
+                    .map((collaborator) => stripParenthetical(collaborator))
+                    .filter((item) => item.length > 0)
+                    .join('、')}
+                </p>
               </article>
             ))}
           </section>

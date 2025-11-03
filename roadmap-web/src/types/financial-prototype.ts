@@ -52,7 +52,7 @@ export interface RadarData {
 
 // 可行性评估结果
 export interface FeasibilityResult {
-  isFeasi ble: boolean;
+  isFeasible: boolean;
   confidence: number;
   monthlySavingsNeeded: number;
   savingsRate: number;
@@ -147,4 +147,3 @@ export interface ProgressInfo {
   percentage: number;
   label: string;
 }
-
