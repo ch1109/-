@@ -6,12 +6,8 @@ import {
   featurePriorities,
   mvpFlowSummaries,
   mvpLoopStages,
-  matrixCategories,
-  matrixRoles,
-  roleStageMatrix,
   nodeInsights,
   financialDataSections,
-  financialSynergyRows,
 } from './data/index'
 import {
   prototypeModeSummaries,
@@ -28,26 +24,21 @@ import {
 } from './data/prototype'
 import type {
   JourneyNodeInsight,
-  MatrixCategory,
-  RoleStageCell,
   NodeInsight,
 } from './types/roadmap'
 import avatarImage from './assets/agent-avatar.png'
-import { FinancialPrototype } from './components/FinancialPrototype'
 import { ThreeAreasIntro } from './components/ThreeAreasIntro'
 import { PersonaIntro } from './components/PersonaIntro'
 import { RoleDataFlow } from './components/RoleDataFlow'
 import './App.css'
 
 type ViewMode =
-  | 'financial-prototype'
   | 'prototype'
   | 'journey'
   | 'agents'
   | 'role-data-flow'
   | 'data'
   | 'priorities'
-  | 'matrix'
   | 'insight'
   | 'decision'
 
@@ -74,11 +65,6 @@ const viewModes: Array<{
     description: '待机态与工作态的双屏展示。',
   },
   {
-    id: 'financial-prototype',
-    label: '🚀 金融原型机交互演示',
-    description: '双区域协同交互 - 流程A & 流程B',
-  },
-  {
     id: 'journey',
     label: '旅程视图',
     description: '横向阶段 × 节点，纵向映射能力与数据。',
@@ -102,11 +88,6 @@ const viewModes: Array<{
     id: 'priorities',
     label: '功能优先级',
     description: 'P0-P3功能分级与样例。',
-  },
-  {
-    id: 'matrix',
-    label: '角色矩阵',
-    description: '角色 × 阶段的能力与数据需求。',
   },
   {
     id: 'insight',
@@ -967,21 +948,6 @@ function App() {
     return map
   }, [])
 
-  const roleStageMap = useMemo(() => {
-    const map = new Map<string, RoleStageCell>()
-    roleStageMatrix.forEach((cell) => {
-      map.set(`${cell.roleId}-${cell.stageId}`, cell)
-    })
-    return map
-  }, [])
-
-  const categoryById = useMemo(() => {
-    return matrixCategories.reduce<Record<string, MatrixCategory>>((acc, category) => {
-      acc[category.id] = category
-      return acc
-    }, {})
-  }, [])
-
   const insightSections: Array<{
     id: string
     label: string
@@ -1030,8 +996,6 @@ function App() {
       </header>
 
       <main className="app-main">
-        {viewMode === 'financial-prototype' && <FinancialPrototype />}
-
         {viewMode === 'prototype' && renderPrototypeView()}
 
         {viewMode === 'journey' && (
@@ -1160,7 +1124,7 @@ function App() {
             {financialDataSections.map((section) => (
               <article key={section.id} className="data-section">
                 <header>
-                  <span className="section-tag">{section.id === 'bank' ? 'Bank' : 'Securities'}</span>
+                  <span className="section-tag">Securities</span>
                   <h2>{section.title}</h2>
                 </header>
                 <div className="data-section-body">
@@ -1203,29 +1167,6 @@ function App() {
                 </div>
               </article>
             ))}
-            <article className="data-synergy">
-              <h3>数据协同价值</h3>
-              <table className="data-table synergy-table">
-                <thead>
-                  <tr>
-                    <th>维度</th>
-                    <th>银行价值</th>
-                    <th>证券价值</th>
-                    <th>协同洞察</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {financialSynergyRows.map((row) => (
-                    <tr key={row.dimension}>
-                      <td>{row.dimension}</td>
-                      <td>{row.bankValue}</td>
-                      <td>{row.securitiesValue}</td>
-                      <td>{row.synergy}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </article>
           </section>
         )}
 
@@ -1259,79 +1200,6 @@ function App() {
               </article>
             ))}
           </section>
-        )}
-
-        {viewMode === 'matrix' && (
-          <div className="matrix-view">
-            <div className="matrix-legend">
-              {matrixCategories.map((category) => (
-                <span
-                  key={category.id}
-                  className="matrix-legend-item"
-                  style={{ backgroundColor: `${category.color}15` }}
-                >
-                  <span className="matrix-legend-dot" style={{ backgroundColor: category.color }} />
-                  <strong>{category.label}</strong>
-                  <small>{category.description}</small>
-                </span>
-              ))}
-            </div>
-            <div
-              className="matrix-grid"
-              style={{ gridTemplateColumns: `240px repeat(${phases.length}, 1fr)` }}
-            >
-              <div className="matrix-grid-corner">
-                <h2>5大核心角色</h2>
-                <p className="muted">贯穿用户旅程的角色职责与所需数据</p>
-              </div>
-              {phases.map((phase) => (
-                <div key={phase.id} className="matrix-grid-column">
-                  <span className="phase-label">{phase.label}</span>
-                  <h2>{phase.theme}</h2>
-                </div>
-              ))}
-              {matrixRoles.map((role) => (
-                <Fragment key={role.id}>
-                  <div className="matrix-row-header">
-                    <div className="role-avatar">{role.icon ?? '🤖'}</div>
-                    <div>
-                      <h3>{role.name}</h3>
-                      <p className="muted">{role.summary}</p>
-                    </div>
-                  </div>
-                  {phases.map((phase) => {
-                    const cell = roleStageMap.get(`${role.id}-${phase.id}`)
-                    if (!cell) {
-                      return <div key={`${role.id}-${phase.id}`} className="matrix-cell empty" />
-                    }
-                    return (
-                      <div key={`${role.id}-${phase.id}`} className="matrix-cell">
-                        {cell.groups.map((group) => {
-                          const category = categoryById[group.id]
-                          return (
-                            <div
-                              key={group.id}
-                              className="matrix-chip"
-                              style={{ backgroundColor: `${category?.color ?? '#e2e8f0'}20` }}
-                            >
-                              <span className="chip-label" style={{ color: category?.color }}>
-                                {group.title}
-                              </span>
-                              <ul>
-                                {group.items.map((item) => (
-                                  <li key={item.id}>{item.label}</li>
-                                ))}
-                              </ul>
-                            </div>
-                          )
-                        })}
-                      </div>
-                    )
-                  })}
-                </Fragment>
-              ))}
-            </div>
-          </div>
         )}
 
         {viewMode === 'insight' && (

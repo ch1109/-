@@ -7,16 +7,8 @@ export {
   mvpDecisionSteps,
   mvpBoundaryQuestions,
 } from './decisionLogic';
-export {
-  matrixCategories,
-  matrixRoles,
-  roleStageMatrix,
-} from './roleMatrix';
 export { nodeInsights } from './nodeInsights';
-export {
-  financialDataSections,
-  financialSynergyRows,
-} from './financialData';
+export { financialDataSections } from './financialData';
 export {
   roleNodes,
   externalNodes,

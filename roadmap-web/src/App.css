@@ -1167,11 +1167,6 @@ button.ghost {
   box-shadow: 0 18px 36px -32px rgba(15, 23, 42, 0.85);
 }
 
-.data-section.synergy {
-  background: linear-gradient(135deg, rgba(79, 70, 229, 0.05), rgba(14, 165, 233, 0.05));
-  border-color: rgba(79, 70, 229, 0.25);
-}
-
 .data-section header {
   display: flex;
   align-items: center;
@@ -1288,11 +1283,6 @@ button.ghost {
   background: #f3f4f6;
   font-weight: 600;
   font-size: 0.85rem;
-}
-
-.data-section.synergy .data-table-wrapper {
-  border-color: rgba(79, 70, 229, 0.25);
-  background: rgba(255, 255, 255, 0.85);
 }
 
 .metrics-table {
@@ -1475,181 +1465,6 @@ button.ghost {
 .insight-tip {
   text-align: right;
   font-size: 0.9rem;
-}
-
-.matrix-view {
-  display: flex;
-  flex-direction: column;
-  gap: 1.75rem;
-}
-
-.matrix-legend {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.85rem;
-}
-
-.matrix-legend-item {
-  display: inline-flex;
-  flex-direction: column;
-  gap: 0.2rem;
-  padding: 0.75rem 1rem;
-  border-radius: 0.9rem;
-  border: 1px solid rgba(99, 102, 241, 0.1);
-  background: #f8fafc;
-  min-width: 180px;
-}
-
-.matrix-legend-item strong {
-  font-size: 0.95rem;
-}
-
-.matrix-legend-item small {
-  color: #475569;
-}
-
-.matrix-legend-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 999px;
-  display: inline-block;
-}
-
-.matrix-grid {
-  display: grid;
-  gap: 0.75rem;
-  align-items: start;
-}
-
-.matrix-grid-corner {
-  background: #fef2f2;
-  border-radius: 1rem;
-  border: 1px solid #fee2e2;
-  padding: 1.25rem;
-  box-shadow: inset 0 0 40px -30px rgba(248, 113, 113, 0.8);
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.matrix-grid-corner h2 {
-  margin: 0;
-  font-size: 1.1rem;
-}
-
-.matrix-grid-column {
-  border-radius: 1rem;
-  padding: 1.25rem;
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(14, 165, 233, 0.08));
-  border: 1px solid rgba(99, 102, 241, 0.12);
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-  min-height: 120px;
-}
-
-.matrix-grid-column h2 {
-  margin: 0;
-  font-size: 1.1rem;
-}
-
-.matrix-grid-column p {
-  margin: 0;
-  color: #475569;
-}
-
-.matrix-role-card {
-  display: flex;
-  gap: 0.75rem;
-  border-radius: 1rem;
-  border: 1px solid #e5e7eb;
-  background: #fff;
-  padding: 1rem;
-  align-items: flex-start;
-  box-shadow: 0 18px 32px -32px rgba(30, 64, 175, 0.8);
-}
-
-.matrix-role-card h3 {
-  margin: 0;
-  font-size: 1.05rem;
-}
-
-.matrix-role-card p {
-  margin: 0.25rem 0 0;
-}
-
-.role-icon {
-  font-size: 1.8rem;
-}
-
-.matrix-cell {
-  border-radius: 1rem;
-  border: 1px dashed #cbd5f5;
-  background: rgba(248, 250, 252, 0.9);
-  padding: 1rem;
-  min-height: 180px;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.matrix-group h4 {
-  margin: 0;
-  font-size: 0.95rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: #6366f1;
-}
-
-.matrix-group ul {
-  margin: 0.5rem 0 0;
-  padding-left: 0;
-  list-style: none;
-  display: grid;
-  gap: 0.55rem;
-}
-
-.matrix-group li {
-  display: flex;
-  gap: 0.5rem;
-  align-items: flex-start;
-  padding: 0.6rem 0.75rem;
-  border-radius: 0.8rem;
-  background: #fff;
-  border: 1px solid rgba(148, 163, 184, 0.25);
-  box-shadow: 0 10px 24px -24px rgba(15, 23, 42, 0.9);
-}
-
-.matrix-item-indicator {
-  width: 6px;
-  min-width: 6px;
-  border-radius: 3px;
-  height: 100%;
-  position: relative;
-  top: 2px;
-}
-
-.matrix-item-label {
-  font-weight: 600;
-  color: #1f2937;
-}
-
-.matrix-item-notes {
-  display: block;
-  font-size: 0.85rem;
-  color: #475569;
-}
-
-.matrix-empty {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #cbd5f5;
-  font-weight: 600;
-  border: 1px dashed rgba(148, 163, 184, 0.3);
-  border-radius: 0.75rem;
-  background: rgba(238, 242, 255, 0.4);
 }
 
 .scenario-status-bar {
@@ -2167,13 +1982,6 @@ button.ghost {
 @media (max-width: 960px) {
   .scenario-keyfacts {
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  }
-}
-
-@media (max-width: 1200px) {
-  .matrix-grid {
-    overflow-x: auto;
-    padding-bottom: 0.5rem;
   }
 }
 
