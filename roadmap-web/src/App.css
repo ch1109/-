@@ -1285,6 +1285,111 @@ button.ghost {
   font-size: 0.85rem;
 }
 
+.flywheel-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.flywheel-heading h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: #1f2937;
+}
+
+.flywheel-heading p {
+  margin: 0.35rem 0 0;
+  color: #4b5563;
+  font-weight: 500;
+}
+
+.flywheel-summary-panel {
+  border: 1px solid #e5e7eb;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, rgba(249, 250, 251, 0.95), rgba(237, 242, 255, 0.92));
+  padding: 1.25rem;
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.flywheel-summary-block {
+  border: 1px solid rgba(79, 70, 229, 0.18);
+  border-radius: 0.9rem;
+  background: #ffffff;
+  padding: 1.1rem 1.35rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  box-shadow: 0 14px 32px -30px rgba(79, 70, 229, 0.45);
+}
+
+.flywheel-summary-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.18rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #4338ca;
+  background: rgba(99, 102, 241, 0.12);
+}
+
+.flywheel-summary-block h4 {
+  margin: 0;
+  font-size: 1.03rem;
+  color: #1f2937;
+  letter-spacing: 0.03em;
+}
+
+.flywheel-summary-block p {
+  margin: 0;
+  color: #1f2937;
+  line-height: 1.68;
+}
+
+.flywheel-summary-list {
+  margin: 0;
+  padding-left: 1.15rem;
+  display: grid;
+  gap: 0.4rem;
+  color: #1f2937;
+  list-style: disc;
+}
+
+.flywheel-table td {
+  vertical-align: top;
+}
+
+.flywheel-table th:first-child,
+.flywheel-table td:first-child {
+  width: 180px;
+}
+
+.flywheel-challenge {
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.flywheel-list {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.35rem;
+  color: #1f2937;
+}
+
+.flywheel-category-cell {
+  font-weight: 700;
+  color: #4338ca;
+}
+
 .metrics-table {
   display: grid;
   gap: 0.6rem;

@@ -1,4 +1,5 @@
 import type { DataNeedSection } from '../types/roadmap';
+import { flywheelContent } from './flywheel';
 
 export const financialDataSections: DataNeedSection[] = [
   {
@@ -151,6 +152,6 @@ export const financialDataSections: DataNeedSection[] = [
         priority: '🟡重要',
       },
     ],
+    flywheel: flywheelContent,
   },
 ];
-

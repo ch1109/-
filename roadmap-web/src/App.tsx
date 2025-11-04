@@ -25,6 +25,7 @@ import {
 import type {
   JourneyNodeInsight,
   NodeInsight,
+  DataFlywheelContent,
 } from './types/roadmap'
 import avatarImage from './assets/agent-avatar.png'
 import { ThreeAreasIntro } from './components/ThreeAreasIntro'
@@ -361,6 +362,69 @@ const renderTriggerBadges = (insight?: NodeInsight) => {
     </div>
   )
 }
+
+const FlywheelList = ({ items }: { items: string[] }) => (
+  <ul className="flywheel-list">
+    {items.map((item, index) => (
+      <li key={`${index}-${item}`}>{item}</li>
+    ))}
+  </ul>
+)
+
+const FlywheelSection = ({ content }: { content: DataFlywheelContent }) => (
+  <section className="flywheel-section">
+    <div className="flywheel-heading">
+      <h3>{content.title}</h3>
+      <p>{content.description}</p>
+    </div>
+    <div className="flywheel-summary-panel">
+      <div className="flywheel-summary-block">
+        <span className="flywheel-summary-chip">Strategic Insight</span>
+        <h4>AI系统输出的战略洞察</h4>
+        <p>{content.summaryNarrative}</p>
+      </div>
+      <div className="flywheel-summary-block">
+        <span className="flywheel-summary-chip">Core Value</span>
+        <h4>{content.valueTitle}</h4>
+        <ul className="flywheel-summary-list">
+          {content.valuePoints.map((point, index) => (
+            <li key={`${index}-${point}`}>{point}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+    <div className="data-table-wrapper">
+      <table className="data-table flywheel-table">
+        <thead>
+          <tr>
+            <th>数据类别</th>
+            <th>您遇到的业务难题</th>
+            <th>AI给您什么数据</th>
+            <th>这个数据能帮您做什么</th>
+            <th>实际效果</th>
+          </tr>
+        </thead>
+        <tbody>
+          {content.useCaseTable.map((row, index) => (
+            <tr key={`${row.challenge}-${index}`}>
+              <td className="flywheel-category-cell">{row.category}</td>
+              <td className="flywheel-challenge">{row.challenge}</td>
+              <td>
+                <FlywheelList items={row.aiOutput} />
+              </td>
+              <td>
+                <FlywheelList items={row.enablement} />
+              </td>
+              <td>
+                <FlywheelList items={row.impact} />
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+)
 
 function App() {
   const [viewMode, setViewMode] = useState<ViewMode>('prototype')
@@ -1164,6 +1228,7 @@ function App() {
                       </tbody>
                     </table>
                   </div>
+                  {section.flywheel && <FlywheelSection content={section.flywheel} />}
                 </div>
               </article>
             ))}

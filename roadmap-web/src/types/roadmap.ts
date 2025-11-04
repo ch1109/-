@@ -147,6 +147,23 @@ export interface DataNeedRow {
   priority: string;
 }
 
+export interface FlywheelUseCaseRow {
+  category: string;
+  challenge: string;
+  aiOutput: string[];
+  enablement: string[];
+  impact: string[];
+}
+
+export interface DataFlywheelContent {
+  title: string;
+  description: string;
+  summaryNarrative: string;
+  valueTitle: string;
+  valuePoints: string[];
+  useCaseTable: FlywheelUseCaseRow[];
+}
+
 export interface DataNeedSection {
   id: 'bank' | 'securities';
   title: string;
@@ -154,6 +171,7 @@ export interface DataNeedSection {
   keyDimensions: string[];
   narrative: string;
   table: DataNeedRow[];
+  flywheel?: DataFlywheelContent;
 }
 
 export interface DataSynergyRow {
