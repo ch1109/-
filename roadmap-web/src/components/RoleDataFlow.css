@@ -1,0 +1,328 @@
+/* 角色数据流转关系图样式 */
+.role-data-flow {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: #F9FAFB;
+}
+
+/* 顶部工具栏 */
+.flow-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 2rem;
+  background: white;
+  border-bottom: 1px solid #E5E7EB;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.toolbar-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.toolbar-section h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1F2937;
+}
+
+.toolbar-section p.muted {
+  margin: 0.25rem 0 0 0;
+  font-size: 0.875rem;
+  color: #6B7280;
+}
+
+.toolbar-section label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.scenario-select {
+  padding: 0.5rem 1rem;
+  border: 1px solid #D1D5DB;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.scenario-select:hover {
+  border-color: #9CA3AF;
+}
+
+.scenario-select:focus {
+  outline: none;
+  border-color: #3B82F6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* 图例 */
+.legend {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: #6B7280;
+}
+
+.legend-line {
+  width: 30px;
+  height: 0;
+  border-top: 2px solid;
+}
+
+/* 主内容区域 */
+.flow-main {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* 画布区域 */
+.flow-canvas {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 3rem 2rem;
+  overflow: auto;
+  background: white;
+}
+
+.flow-canvas svg {
+  max-width: 100%;
+  height: auto;
+  min-height: 850px;
+}
+
+/* 详情面板 */
+.flow-detail-panel {
+  width: 400px;
+  background: white;
+  border-left: 1px solid #E5E7EB;
+  overflow-y: auto;
+  padding: 2rem;
+}
+
+.detail-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.detail-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #E5E7EB;
+}
+
+.detail-emoji {
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.detail-header > div {
+  flex: 1;
+}
+
+.detail-header h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1F2937;
+}
+
+.detail-layer {
+  display: inline-block;
+  margin-top: 0.25rem;
+  padding: 0.25rem 0.75rem;
+  background: #EFF6FF;
+  color: #3B82F6;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  text-transform: capitalize;
+}
+
+.close-button {
+  padding: 0.5rem;
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  color: #9CA3AF;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.close-button:hover {
+  color: #374151;
+}
+
+.detail-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.detail-section h4 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.detail-section ul,
+.detail-section ol {
+  margin: 0;
+  padding-left: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.detail-section li {
+  font-size: 0.875rem;
+  color: #4B5563;
+  line-height: 1.5;
+}
+
+.detail-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  color: #9CA3AF;
+  gap: 2rem;
+}
+
+.detail-placeholder p {
+  font-size: 0.875rem;
+}
+
+.scenario-info {
+  padding: 1.5rem;
+  background: #F3F4F6;
+  border-radius: 0.5rem;
+  width: 100%;
+}
+
+.scenario-info h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1F2937;
+}
+
+.scenario-info p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #6B7280;
+  line-height: 1.5;
+}
+
+/* SVG节点交互效果 */
+.flow-canvas svg g {
+  transition: all 0.3s ease;
+}
+
+.flow-canvas svg g:hover rect {
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+  transform: scale(1.05);
+}
+
+.flow-canvas svg path {
+  transition: all 0.3s ease;
+}
+
+.flow-canvas svg path:hover {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+/* 响应式设计 */
+@media (max-width: 1280px) {
+  .flow-detail-panel {
+    width: 350px;
+  }
+  
+  .flow-toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .legend {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 768px) {
+  .flow-main {
+    flex-direction: column;
+  }
+  
+  .flow-detail-panel {
+    width: 100%;
+    max-height: 300px;
+    border-left: none;
+    border-top: 1px solid #E5E7EB;
+  }
+  
+  .flow-canvas {
+    padding: 1rem;
+  }
+  
+  .flow-canvas svg {
+    width: 100%;
+    height: auto;
+  }
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.detail-content {
+  animation: fadeIn 0.3s ease;
+}
+
+/* 滚动条样式 */
+.flow-detail-panel::-webkit-scrollbar {
+  width: 8px;
+}
+
+.flow-detail-panel::-webkit-scrollbar-track {
+  background: #F3F4F6;
+}
+
+.flow-detail-panel::-webkit-scrollbar-thumb {
+  background: #D1D5DB;
+  border-radius: 4px;
+}
+
+.flow-detail-panel::-webkit-scrollbar-thumb:hover {
+  background: #9CA3AF;
+}
+

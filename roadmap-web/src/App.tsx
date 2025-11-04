@@ -36,6 +36,7 @@ import avatarImage from './assets/agent-avatar.png'
 import { FinancialPrototype } from './components/FinancialPrototype'
 import { ThreeAreasIntro } from './components/ThreeAreasIntro'
 import { PersonaIntro } from './components/PersonaIntro'
+import { RoleDataFlow } from './components/RoleDataFlow'
 import './App.css'
 
 type ViewMode =
@@ -43,6 +44,7 @@ type ViewMode =
   | 'prototype'
   | 'journey'
   | 'agents'
+  | 'role-data-flow'
   | 'data'
   | 'priorities'
   | 'matrix'
@@ -85,6 +87,11 @@ const viewModes: Array<{
     id: 'agents',
     label: 'AI角色',
     description: '八大专业Agent与调度官的职责与协作。',
+  },
+  {
+    id: 'role-data-flow',
+    label: '角色数据流转关系图',
+    description: '可视化展示9个AI角色之间的数据流转关系和协作机制。',
   },
   {
     id: 'data',
@@ -1145,6 +1152,8 @@ function App() {
             ))}
           </section>
         )}
+
+        {viewMode === 'role-data-flow' && <RoleDataFlow />}
 
         {viewMode === 'data' && (
           <section className="data-view">

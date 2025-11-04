@@ -17,3 +17,9 @@ export {
   financialDataSections,
   financialSynergyRows,
 } from './financialData';
+export {
+  roleNodes,
+  externalNodes,
+  dataFlows,
+  scenarios as roleDataFlowScenarios,
+} from './roleDataFlow';
