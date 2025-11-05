@@ -1192,6 +1192,55 @@ function App() {
                   <h2>{section.title}</h2>
                 </header>
                 <div className="data-section-body">
+                  {section.demoSummary && (
+                    <div className="demo-summary">
+                      <h3>{section.demoSummary.title}</h3>
+                      <p className="demo-summary-intro">{section.demoSummary.intro}</p>
+                      <div className="demo-summary-items">
+                        {section.demoSummary.items.map((item) => (
+                          <div key={item.title} className="demo-summary-item">
+                            <div className="demo-summary-header">
+                              <span className="demo-item-title">{item.title}</span>
+                              <span className="demo-item-description">{item.description}</span>
+                            </div>
+                            <ul className="demo-summary-points">
+                              {item.summaryPoints.map((point) => (
+                                <li key={point}>{point}</li>
+                              ))}
+                            </ul>
+                            {item.example && (
+                              <details className="demo-summary-example">
+                                <summary>查看数据示例</summary>
+                                <div className="demo-example">
+                                  <h4>{item.example.label}</h4>
+                                  {item.example.sections.map((exampleSection) => (
+                                    <div
+                                      key={`${item.example?.label}-${exampleSection.title}`}
+                                      className="demo-example-section"
+                                    >
+                                      <h5>{exampleSection.title}</h5>
+                                      <ul>
+                                        {exampleSection.items.map((exampleItem) => (
+                                          <li key={exampleItem}>{exampleItem}</li>
+                                        ))}
+                                      </ul>
+                                    </div>
+                                  ))}
+                                  {item.example.notes && (
+                                    <div className="demo-example-notes">
+                                      {item.example.notes.map((note) => (
+                                        <p key={note}>{note}</p>
+                                      ))}
+                                    </div>
+                                  )}
+                                </div>
+                              </details>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                   {section.overview.map((paragraph) => (
                     <p key={paragraph}>{paragraph}</p>
                   ))}

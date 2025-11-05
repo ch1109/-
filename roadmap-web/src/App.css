@@ -1200,6 +1200,150 @@ button.ghost {
   line-height: 1.7;
 }
 
+.demo-summary {
+  border: 1px solid rgba(99, 102, 241, 0.18);
+  background: linear-gradient(135deg, rgba(237, 242, 255, 0.24), rgba(255, 255, 255, 0.65));
+  border-radius: 0.9rem;
+  padding: 1rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.demo-summary h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  color: #312e81;
+}
+
+.demo-summary-intro {
+  margin: 0;
+  color: #4c51bf;
+  font-weight: 500;
+}
+
+.demo-summary-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.demo-summary-item {
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  background: #fff;
+  padding: 0.95rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.demo-summary-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.demo-summary-points {
+  margin: 0;
+  padding-left: 1.2rem;
+  display: grid;
+  gap: 0.4rem;
+  color: #4b5563;
+}
+
+.demo-item-title {
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.demo-item-description {
+  font-size: 0.9rem;
+  color: #4b5563;
+}
+
+.demo-summary-example {
+  border: 1px solid #e5e7eb;
+  border-radius: 0.7rem;
+  background: #f9fafb;
+  overflow: hidden;
+  margin-top: 0.15rem;
+}
+
+.demo-summary-example summary {
+  list-style: none;
+  padding: 0.8rem 1rem;
+  cursor: pointer;
+  font-weight: 600;
+  color: #4c51bf;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.8rem;
+  position: relative;
+}
+
+.demo-summary-example summary::-webkit-details-marker {
+  display: none;
+}
+
+.demo-summary-example summary::after {
+  content: '展开';
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #6366f1;
+}
+
+.demo-summary-example[open] summary::after {
+  content: '收起';
+}
+
+.demo-example {
+  padding: 1rem 1.15rem 1.15rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.demo-example h4 {
+  margin: 0;
+  font-size: 1rem;
+  color: #1f2937;
+}
+
+.demo-example-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.demo-example-section h5 {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #312e81;
+}
+
+.demo-example-section ul {
+  margin: 0;
+  padding-left: 1.2rem;
+  display: grid;
+  gap: 0.3rem;
+  color: #374151;
+}
+
+.demo-example-notes {
+  padding: 0.85rem 1rem;
+  border-radius: 0.6rem;
+  background: rgba(99, 102, 241, 0.08);
+  border: 1px solid rgba(99, 102, 241, 0.18);
+  color: #312e81;
+  display: grid;
+  gap: 0.35rem;
+}
+
 .data-highlights {
   border-radius: 0.85rem;
   padding: 1rem;
