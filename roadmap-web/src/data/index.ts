@@ -15,3 +15,4 @@ export {
   dataFlows,
   scenarios as roleDataFlowScenarios,
 } from './roleDataFlow';
+export { productForms, productFormCategories } from './productForms';

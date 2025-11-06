@@ -8,6 +8,8 @@ import {
   mvpLoopStages,
   nodeInsights,
   financialDataSections,
+  productForms,
+  productFormCategories,
 } from './data/index'
 import {
   prototypeModeSummaries,
@@ -27,15 +29,18 @@ import type {
   NodeInsight,
   DataFlywheelContent,
 } from './types/roadmap'
+import type { ProductFormCategory, ProductFormCategoryId } from './data/productForms'
 import avatarImage from './assets/agent-avatar.png'
 import { ThreeAreasIntro } from './components/ThreeAreasIntro'
 import { PersonaIntro } from './components/PersonaIntro'
 import { RoleDataFlow } from './components/RoleDataFlow'
 import { AIFinancialService } from './components/AIFinancialService'
+import { type LucideIcon, BarChart3, Globe2, Handshake, LayoutDashboard, Sparkles, Users } from 'lucide-react'
 import './App.css'
 
 type ViewMode =
   | 'prototype'
+  | 'product-forms'
   | 'journey'
   | 'agents'
   | 'role-data-flow'
@@ -66,6 +71,11 @@ const viewModes: Array<{
     id: 'prototype',
     label: '金融原型机首页',
     description: '待机态与工作态的双屏展示。',
+  },
+  {
+    id: 'product-forms',
+    label: '产品形态',
+    description: '赋能、客户端到生态的产品矩阵。',
   },
   {
     id: 'journey',
@@ -103,6 +113,15 @@ const viewModes: Array<{
     description: '数据驱动的筛选步骤与检验问题。',
   },
 ]
+
+const CATEGORY_ICON_MAP: Record<string, LucideIcon> = {
+  Handshake,
+  Users,
+  BarChart3,
+  LayoutDashboard,
+  Globe2,
+  Sparkles,
+}
 
 type ScenarioQuickReplyOption = {
   label: string
@@ -438,6 +457,15 @@ function App() {
   const [scenarioContextStore, setScenarioContextStore] = useState<
     Partial<Record<ScenarioId, ScenarioContextMap>>
   >({})
+  const [flippedCards, setFlippedCards] = useState<Record<string, boolean>>({})
+
+  const productCategoryLookup = useMemo(() => {
+    const lookup = {} as Record<ProductFormCategoryId, ProductFormCategory>
+    for (const category of productFormCategories) {
+      lookup[category.id] = category
+    }
+    return lookup
+  }, [])
 
   const allNodes = useMemo(() => phases.flatMap((phase) => phase.nodes), [])
   const [selectedNodeId, setSelectedNodeId] = useState<string>(() => allNodes[0]?.id ?? '')
@@ -506,6 +534,13 @@ function App() {
   const goToPreviousStep = () => {
     if (!activeScenario) return
     goToScenarioStep(scenarioStepIndex - 1)
+  }
+
+  const toggleProductCard = (cardId: string) => {
+    setFlippedCards((current) => ({
+      ...current,
+      [cardId]: !current[cardId],
+    }))
   }
 
   const startScenario = (scenarioId: ScenarioId) => {
@@ -1030,6 +1065,124 @@ function App() {
     return map
   }, [])
 
+  const renderProductFormsView = () => {
+    return (
+      <section className="product-forms-view">
+        <div className="product-forms-hero">
+          <div className="product-forms-intro">
+            <p className="eyebrow">Product Matrix</p>
+            <h2>AI 理财投顾产品形态总览</h2>
+            <p>
+              以“赋能型、客户端、决策支持、管理运营、生态协作”五大路径串联 41 种产品形态，
+              帮助团队快速定位场景、讲清价值，并统一叙事风格。
+            </p>
+          </div>
+          <div className="product-forms-glance">
+            <dl>
+              <div>
+                <dt>产品类别</dt>
+                <dd>{productFormCategories.length}</dd>
+              </div>
+              <div>
+                <dt>产品形态</dt>
+                <dd>{productForms.length}</dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+
+        <div className="product-forms-legend">
+          {productFormCategories.map((category) => {
+            const CategoryIcon = CATEGORY_ICON_MAP[category.icon] ?? Sparkles
+            return (
+              <div
+                key={category.id}
+                className="product-forms-legend-item"
+                style={{ '--accent-color': category.color } as CSSProperties}
+              >
+                <span className="legend-icon-ring" aria-hidden="true">
+                  <CategoryIcon size={18} strokeWidth={1.8} />
+                </span>
+                <div className="legend-text">
+                  <strong>{category.title}</strong>
+                  <small>{category.description}</small>
+                </div>
+              </div>
+            )
+          })}
+        </div>
+
+        <div className="product-forms-grid">
+          {productForms.map((form) => {
+            const category = productCategoryLookup[form.categoryId]
+            if (!category) return null
+            const CategoryIcon = CATEGORY_ICON_MAP[category.icon] ?? Sparkles
+            const isFlipped = flippedCards[form.id] ?? false
+            const highlights = form.detailSections[0]?.items.slice(0, 2) ?? []
+            const cardStyle = { '--accent-color': category.color } as CSSProperties
+            return (
+              <button
+                key={form.id}
+                type="button"
+                className={`product-card ${isFlipped ? 'is-flipped' : ''}`}
+                onClick={() => toggleProductCard(form.id)}
+                style={cardStyle}
+                aria-pressed={isFlipped}
+              >
+                <div className="product-card-inner">
+                  <div className="product-card-face product-card-front">
+                    <div className="product-card-topline">
+                      <span className="product-card-category">
+                        <CategoryIcon size={16} strokeWidth={1.8} />
+                        {category.title}
+                      </span>
+                      <span className="product-card-group">{form.group}</span>
+                    </div>
+                    <div className="product-card-icon-ring" aria-hidden="true">
+                      <CategoryIcon size={22} strokeWidth={1.6} />
+                    </div>
+                    <h3>{form.title}</h3>
+                    <p className="product-card-summary">{form.summary}</p>
+                    {highlights.length > 0 && (
+                      <div className="product-card-highlights">
+                        {highlights.map((item, index) => (
+                          <span key={`${form.id}-highlight-${index}`}>{item}</span>
+                        ))}
+                      </div>
+                    )}
+                    <span className="product-card-hint">点击查看详情</span>
+                  </div>
+                  <div className="product-card-face product-card-back">
+                    <div className="product-card-back-header">
+                      <span className="product-card-category">
+                        <CategoryIcon size={14} strokeWidth={1.8} />
+                        {category.title}
+                      </span>
+                      <span className="product-card-group">{form.group}</span>
+                    </div>
+                    <div className="product-card-details">
+                      {form.detailSections.map((section) => (
+                        <div key={`${form.id}-${section.title}`} className="product-card-section">
+                          <h4>{section.title}</h4>
+                          <ul>
+                            {section.items.map((item, index) => (
+                              <li key={`${form.id}-${section.title}-${index}`}>{item}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+                    <span className="product-card-hint">再次点击收起</span>
+                  </div>
+                </div>
+              </button>
+            )
+          })}
+        </div>
+      </section>
+    )
+  }
+
   const insightSections: Array<{
     id: string
     label: string
@@ -1079,6 +1232,8 @@ function App() {
 
       <main className="app-main">
         {viewMode === 'prototype' && renderPrototypeView()}
+
+        {viewMode === 'product-forms' && renderProductFormsView()}
 
         {viewMode === 'journey' && (
           <div className="journey-view">

@@ -1,3 +1,7 @@
+:root {
+  --product-card-gradient: linear-gradient(135deg, #c084fc 0%, #6366f1 100%);
+}
+
 .app-shell {
   display: flex;
   flex-direction: column;
@@ -2308,4 +2312,343 @@ button.ghost:disabled {
   flex: 0 0 auto;
   justify-content: center;
   margin-top: -0.2rem;
+}
+
+/* 产品形态视图 */
+.product-forms-view {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.product-forms-hero {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  padding: 1.75rem 2rem;
+  border-radius: 1.35rem;
+  background: linear-gradient(135deg, #eef2ff, #f8fafc);
+  border: 1px solid #e2e8f0;
+}
+
+.product-forms-intro {
+  flex: 1;
+  min-width: 260px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.product-forms-intro h2 {
+  margin: 0;
+  font-size: 1.9rem;
+  line-height: 1.3;
+  color: #111827;
+}
+
+.product-forms-intro p {
+  margin: 0;
+  color: #475467;
+  line-height: 1.6;
+}
+
+.eyebrow {
+  margin: 0;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #6366f1;
+}
+
+.product-forms-glance {
+  min-width: 220px;
+  display: flex;
+  align-items: center;
+}
+
+.product-forms-glance dl {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 2rem;
+}
+
+.product-forms-glance div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.product-forms-glance dt {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #94a3b8;
+}
+
+.product-forms-glance dd {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.product-forms-legend {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.product-forms-legend-item {
+  --accent-color: #6366f1;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  padding: 0.95rem 1.1rem;
+  border-radius: 1.1rem;
+  border: 1px solid color-mix(in srgb, var(--accent-color) 35%, #e2e8f0);
+  background: #fff;
+  box-shadow: 0 16px 30px -32px rgba(15, 23, 42, 0.65);
+}
+
+.legend-icon-ring {
+  width: 44px;
+  height: 44px;
+  border-radius: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--accent-color) 18%, #f8fafc);
+  color: var(--accent-color);
+}
+
+.legend-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.legend-text strong {
+  font-size: 1rem;
+  color: #0f172a;
+}
+
+.legend-text small {
+  font-size: 0.85rem;
+  color: #475467;
+  line-height: 1.45;
+}
+
+.product-forms-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.product-card {
+  --accent-color: #6366f1;
+  --card-rotation: 0deg;
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  perspective: 1400px;
+  text-align: left;
+}
+
+.product-card.is-flipped {
+  --card-rotation: 180deg;
+}
+
+.product-card:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--accent-color) 60%, #c7d2fe);
+  outline-offset: 6px;
+  border-radius: 1.2rem;
+}
+
+.product-card-inner {
+  position: relative;
+  width: 100%;
+  min-height: 360px;
+  transform-style: preserve-3d;
+  border-radius: 1.2rem;
+  transition: transform 0.6s ease, box-shadow 0.3s ease;
+  box-shadow: 0 20px 55px -32px rgba(15, 23, 42, 0.45);
+  transform: rotateY(var(--card-rotation));
+}
+
+.product-card:hover .product-card-inner {
+  transform: rotateY(var(--card-rotation)) translateY(-6px);
+}
+
+.product-card-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.75rem;
+  background: #fff;
+  border-radius: inherit;
+  border: 1px solid #eef2ff;
+  backface-visibility: hidden;
+}
+
+.product-card-face::before {
+  content: '';
+  position: absolute;
+  inset: 0 1.25rem auto;
+  height: 2px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent-color) 45%, transparent);
+  pointer-events: none;
+}
+
+.product-card-front {
+  z-index: 2;
+}
+
+.product-card-back {
+  transform: rotateY(180deg);
+  overflow-y: auto;
+}
+
+.product-card-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.product-card-category {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  background-image: var(--product-card-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.product-card-category svg {
+  color: var(--accent-color);
+}
+
+.product-card-group {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-align: right;
+  background-image: var(--product-card-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.product-card-icon-ring {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--accent-color) 18%, #f8fafc);
+  color: var(--accent-color);
+  box-shadow: inset 0 1px 4px rgba(255, 255, 255, 0.4);
+}
+
+.product-card h3 {
+  margin: 0;
+  font-size: 1.3rem;
+  line-height: 1.35;
+  color: #0f172a;
+}
+
+.product-card-summary {
+  margin: 0;
+  color: #475467;
+  line-height: 1.6;
+}
+
+.product-card-highlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.product-card-highlights span {
+  font-size: 0.78rem;
+  padding: 0.32rem 0.75rem;
+  border-radius: 999px;
+  background-image: var(--product-card-gradient);
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 10px 18px -16px rgba(99, 102, 241, 0.7);
+}
+
+.product-card-hint {
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+.product-card-back-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.product-card-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-right: 0.25rem;
+}
+
+.product-card-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.product-card-section h4 {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #0f172a;
+}
+
+.product-card-section ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  color: #475467;
+  line-height: 1.55;
+}
+
+.product-card-section li {
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .product-forms-hero {
+    padding: 1.5rem;
+  }
+
+  .product-card-inner {
+    min-height: 320px;
+  }
+
+  .product-card-face {
+    padding: 1.35rem;
+  }
 }
