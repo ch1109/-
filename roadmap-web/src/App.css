@@ -949,6 +949,14 @@ button.ghost {
   cursor: pointer;
 }
 
+button.primary:disabled,
+button.outline:disabled,
+button.ghost:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
 .chat-window {
   display: grid;
   gap: 0.75rem;

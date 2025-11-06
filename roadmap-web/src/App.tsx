@@ -31,6 +31,7 @@ import avatarImage from './assets/agent-avatar.png'
 import { ThreeAreasIntro } from './components/ThreeAreasIntro'
 import { PersonaIntro } from './components/PersonaIntro'
 import { RoleDataFlow } from './components/RoleDataFlow'
+import { AIFinancialService } from './components/AIFinancialService'
 import './App.css'
 
 type ViewMode =
@@ -44,6 +45,7 @@ type ViewMode =
   | 'decision'
 
 type PrototypeMode = 'standby' | 'active'
+type WorkspaceView = 'default' | 'ai-wealth'
 
 type PrototypeTile = (typeof prototypeTiles)[number]
 type PrototypePersonaControl = (typeof prototypePersonaControls)[number]
@@ -429,6 +431,7 @@ const FlywheelSection = ({ content }: { content: DataFlywheelContent }) => (
 function App() {
   const [viewMode, setViewMode] = useState<ViewMode>('prototype')
   const [prototypeMode, setPrototypeMode] = useState<PrototypeMode>('standby')
+  const [workspaceView, setWorkspaceView] = useState<WorkspaceView>('default')
   const [activeScenarioId, setActiveScenarioId] = useState<ScenarioId | null>(null)
   const [scenarioStepIndex, setScenarioStepIndex] = useState(0)
   const [scenarioAutoPlay, setScenarioAutoPlay] = useState(false)
@@ -438,6 +441,12 @@ function App() {
 
   const allNodes = useMemo(() => phases.flatMap((phase) => phase.nodes), [])
   const [selectedNodeId, setSelectedNodeId] = useState<string>(() => allNodes[0]?.id ?? '')
+
+  useEffect(() => {
+    if (viewMode !== 'prototype') {
+      setWorkspaceView('default')
+    }
+  }, [viewMode])
 
   const activeScenario = useMemo(
     () => SCENARIOS.find((scenario) => scenario.id === activeScenarioId),
@@ -501,6 +510,7 @@ function App() {
 
   const startScenario = (scenarioId: ScenarioId) => {
     const scenario = SCENARIOS.find((item) => item.id === scenarioId)
+    setWorkspaceView('default')
     setActiveScenarioId(scenarioId)
     setScenarioStepIndex(0)
     setScenarioAutoPlay(false)
@@ -846,7 +856,7 @@ function App() {
               <h3>Agent 工作区</h3>
               {/* 移除了时间和步骤标题显示 */}
             </div>
-            {!activeStep && (
+            {!activeStep && workspaceView === 'default' && (
               <div className="workspace-toolbar">
                 {PERSONA_CONTROLS.map((control) => (
                   <button key={control.id} type="button">
@@ -859,7 +869,11 @@ function App() {
 
           {activeStep
             ? renderScenarioWorkspace(activeStep, scenarioContext)
-            : (
+            : workspaceView === 'ai-wealth'
+              ? (
+                <AIFinancialService onBack={() => setWorkspaceView('default')} />
+              )
+              : (
                 <Fragment>
                   <div className="workspace-search">
                     <div className="workspace-searchbar">
@@ -885,7 +899,11 @@ function App() {
                     <button type="button" className="primary">
                       请登录
                     </button>
-                    <button type="button" className="outline">
+                    <button
+                      type="button"
+                      className="outline"
+                      onClick={() => setWorkspaceView('ai-wealth')}
+                    >
                       AI 理财专家服务
                     </button>
                   </div>

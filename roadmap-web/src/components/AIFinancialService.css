@@ -1,0 +1,363 @@
+.ai-wealth-service {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.ai-wealth-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1.2rem;
+  padding: 1.2rem 1.4rem;
+  border-radius: 1.2rem;
+  border: 1px solid rgba(96, 165, 250, 0.26);
+  background: linear-gradient(135deg, rgba(239, 246, 255, 0.9), rgba(219, 234, 254, 0.72));
+  box-shadow: 0 24px 44px -32px rgba(59, 130, 246, 0.45);
+}
+
+.ai-wealth-title {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 48ch;
+}
+
+.ai-wealth-subtitle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(59, 130, 246, 0.18);
+  color: #1d4ed8;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.ai-wealth-header h4 {
+  margin: 0;
+  font-size: 1.32rem;
+  color: #0f172a;
+}
+
+.ai-wealth-header p {
+  margin: 0;
+  color: #1e293b;
+  line-height: 1.6;
+}
+
+.ai-wealth-actions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.ai-wealth-toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding: 1rem 1.25rem;
+  border-radius: 1.1rem;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  background: rgba(248, 250, 252, 0.85);
+}
+
+.ai-wealth-searchbar {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.65rem 0.8rem;
+  border-radius: 1rem;
+  background: rgba(15, 23, 42, 0.04);
+  border: 1px solid rgba(148, 163, 184, 0.3);
+}
+
+.ai-wealth-searchbar input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: 0.95rem;
+  color: #0f172a;
+  outline: none;
+}
+
+.ai-wealth-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.ai-wealth-tags button {
+  padding: 0.4rem 0.95rem;
+  border-radius: 999px;
+  border: 1px solid rgba(59, 130, 246, 0.24);
+  background: #fff;
+  color: #1d4ed8;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ai-wealth-tags button.is-active {
+  background: linear-gradient(135deg, #2563eb, #60a5fa);
+  border-color: transparent;
+  color: #fff;
+  box-shadow: 0 16px 32px -26px rgba(59, 130, 246, 0.55);
+}
+
+.ai-wealth-highlight-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.highlight-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.1rem;
+  border-radius: 1.1rem;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 18px 32px -28px rgba(15, 23, 42, 0.18);
+}
+
+.highlight-card.lock {
+  background: linear-gradient(160deg, rgba(248, 250, 255, 0.98), rgba(221, 231, 255, 0.75));
+}
+
+.highlight-card.reminder {
+  background: linear-gradient(160deg, rgba(254, 242, 242, 0.98), rgba(252, 231, 243, 0.75));
+  border-color: rgba(248, 113, 113, 0.35);
+}
+
+.highlight-card.blueprint {
+  background: linear-gradient(160deg, rgba(236, 254, 255, 0.94), rgba(219, 244, 255, 0.72));
+  border-color: rgba(34, 197, 213, 0.3);
+}
+
+.highlight-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.highlight-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.highlight-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.65rem;
+  border-radius: 0.7rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: rgba(148, 163, 184, 0.24);
+  color: #1f2937;
+}
+
+.highlight-badge.severity-high {
+  background: rgba(248, 113, 113, 0.2);
+  color: #b91c1c;
+}
+
+.highlight-badge.progress {
+  background: rgba(59, 130, 246, 0.2);
+  color: #1d4ed8;
+}
+
+.highlight-main {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #0f172a;
+  line-height: 1.5;
+}
+
+.highlight-extra {
+  margin: 0;
+  color: #334155;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.highlight-card p {
+  margin: 0;
+  color: #334155;
+  line-height: 1.55;
+}
+
+button.outline.compact,
+button.ghost.compact,
+button.primary.compact {
+  padding: 0.4rem 0.9rem;
+  font-size: 0.85rem;
+}
+
+.highlight-card button.compact {
+  align-self: flex-start;
+}
+
+.highlight-card button.primary.compact {
+  box-shadow: none;
+}
+
+.ai-wealth-modules {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.ai-wealth-modules header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.ai-wealth-modules header h5 {
+  margin: 0;
+  font-size: 1.05rem;
+  color: #0f172a;
+}
+
+.ai-wealth-modules header p {
+  margin: 0.35rem 0 0;
+  color: #475569;
+  font-size: 0.9rem;
+}
+
+.modules-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.module-card {
+  display: flex;
+  gap: 0.75rem;
+  padding: 1.1rem;
+  border-radius: 1.1rem;
+  border: 1px solid transparent;
+  min-height: 150px;
+  color: #0f172a;
+  position: relative;
+  overflow: hidden;
+}
+
+.module-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(140deg, rgba(255, 255, 255, 0.32), transparent 55%);
+  pointer-events: none;
+}
+
+.module-card .module-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  background: rgba(255, 255, 255, 0.78);
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.module-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  position: relative;
+  z-index: 1;
+}
+
+.module-body h6 {
+  margin: 0;
+  font-size: 1rem;
+  color: #0f172a;
+}
+
+.module-body p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #1f2937;
+  line-height: 1.55;
+}
+
+.module-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.module-tags span {
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.55);
+  font-size: 0.78rem;
+  color: #334155;
+}
+
+.module-card.tone-indigo {
+  background: linear-gradient(135deg, rgba(226, 232, 255, 0.85), rgba(199, 210, 254, 0.68));
+  border-color: rgba(165, 180, 252, 0.75);
+}
+
+.module-card.tone-emerald {
+  background: linear-gradient(135deg, rgba(209, 250, 229, 0.85), rgba(167, 243, 208, 0.68));
+  border-color: rgba(110, 231, 183, 0.7);
+}
+
+.module-card.tone-violet {
+  background: linear-gradient(135deg, rgba(237, 233, 254, 0.86), rgba(221, 214, 254, 0.7));
+  border-color: rgba(196, 181, 253, 0.72);
+}
+
+.module-card.tone-amber {
+  background: linear-gradient(135deg, rgba(255, 247, 237, 0.88), rgba(254, 243, 199, 0.7));
+  border-color: rgba(253, 230, 138, 0.72);
+}
+
+.module-card.tone-slate {
+  background: linear-gradient(135deg, rgba(241, 245, 249, 0.9), rgba(224, 231, 241, 0.7));
+  border-color: rgba(203, 213, 225, 0.7);
+}
+
+.module-card.tone-rose {
+  background: linear-gradient(135deg, rgba(255, 240, 246, 0.88), rgba(254, 226, 226, 0.7));
+  border-color: rgba(252, 211, 232, 0.7);
+}
+
+@media (max-width: 1200px) {
+  .modules-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 820px) {
+  .ai-wealth-header {
+    flex-direction: column;
+  }
+
+  .ai-wealth-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .modules-grid {
+    grid-template-columns: 1fr;
+  }
+}
